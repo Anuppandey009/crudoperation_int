@@ -14,8 +14,16 @@ router.post("/", async(req, res) => {
 
   
 router.get("/", async(req, res) => {
-    //const users = await User.find().lean().exec();    
+    const users = await User.find().lean().exec();    
     console.log("anup pandey");
-   // return res.status(200).json({users})
+   return res.status(200).json({users})
+  });
+
+  router.patch("/:id", async (req, res) => {
+    let users = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+
+    res.status(200).send({ users });
   });
   module.exports = router;
